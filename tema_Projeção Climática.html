@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <title>Projeções Climáticas | Climatologia Aplicada</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Almendra+Display&family=Eczar:wght@800&family=Ruslan+Display&display=swap" rel="stylesheet">  
+    
+    <style>
+        html { scroll-behavior: smooth; }
+        
+        body { 
+            margin: 0; padding: 0; 
+            font-family: 'Open Sans', sans-serif; 
+            color: #333; line-height: 1.6;
+            background-color: #f9f6f0;
+        }
+
+        /* --- MENU FIXO --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(139, 69, 19, 0.95);
+            padding: 23px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        nav a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: 0.3s;
+            padding-bottom: 5px;
+            border-bottom: 2px solid transparent;
+        }
+
+        nav a:hover { color: white; }
+
+        .btn-nav-mapa {
+            background: white; 
+            color: #8b4513 !important;
+            padding: 5px 15px; 
+            border-radius: 15px;
+            opacity: 1 !important;
+        }
+        .btn-nav-mapa:hover { background: #eee; }
+
+        .nav-logo {
+            height: 60px; width: 60px; object-fit: cover; 
+            vertical-align: middle; border: 2px solid white; border-radius: 50%;
+        }
+
+        /* --- ESTRUTURA DA PÁGINA INTERNA --- */
+        .conteudo-tema {
+            padding: 140px 20px 80px;
+            max-width: 1200px; 
+            margin: 0 auto;
+            min-height: calc(100vh - 100px);
+        }
+
+        .titulo-tema {
+            font-family: 'Merriweather', serif;
+            font-size: 2.8em;
+            color: #8b4513;
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .titulo-tema::after {
+            content: ''; display: block; width: 80px; height: 4px;
+            background: #d2691e; margin: 15px auto 0;
+        }
+
+        /* --- ESTILO DO TEXTO --- */
+        .texto-explicacao {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto 40px auto;
+            text-align: justify;
+            font-size: 1.15em;
+            color: #444;
+        }
+
+        .texto-explicacao p {
+            margin-bottom: 20px;
+        }
+
+        /* --- GALERIA DE IMAGENS (2 em cima, 1 centralizada embaixo) --- */
+        .galeria-imagens {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Cria exatamente 2 colunas */
+            gap: 40px; /* Espaço entre as fotos */
+            width: 100%;
+            margin: 0 auto 40px auto;
+            align-items: start; 
+        }
+
+        .imagem-item {
+            width: 100%; 
+            text-align: center;
+        }
+
+        /* Regra especial para a terceira imagem (O Mapa do Brasil) */
+        .imagem-item:nth-child(3) {
+            grid-column: 1 / -1; /* Força a ocupar as duas colunas */
+            max-width: 800px; /* Limita a largura para não ficar gigante */
+            margin: 0 auto; /* Centraliza na tela */
+        }
+
+        .imagem-item img {
+            width: 100%;
+            height: auto; 
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border: 3px solid #d2691e;
+            transition: transform 0.3s;
+            background-color: white; 
+        }
+
+        .imagem-item img:hover {
+            transform: scale(1.03);
+            position: relative;
+            z-index: 10;
+        }
+
+        .legenda-imagem {
+            display: block;
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #666;
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        /* --- RESPONSIVIDADE --- */
+        @media (max-width: 800px) {
+            .galeria-imagens {
+                grid-template-columns: 1fr; /* Em celulares, fica tudo uma embaixo da outra */
+            }
+            .imagem-item:nth-child(3) {
+                grid-column: auto; /* Tira a regra de ocupar 2 colunas no celular */
+            }
+            .imagem-item {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+        }
+
+        /* --- BOTÃO VOLTAR --- */
+        .area-botoes {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .btn-voltar {
+            background-color: #5c2808; 
+            color: white; 
+            padding: 12px 35px;
+            text-decoration: none; 
+            border-radius: 30px; 
+            font-size: 1.1em;
+            font-weight: bold; 
+            box-shadow: 0 4px 10px rgba(92, 40, 8, 0.4);
+            transition: transform 0.2s, background-color 0.2s;
+            display: inline-block;
+        }
+
+        .btn-voltar:hover { 
+            transform: scale(1.05); 
+            background-color: #8b4513; 
+        }
+
+        footer { background: #333; color: #aaa; text-align: center; padding: 20px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <img src="home.png" class="nav-logo" alt="Logo">
+        <a href="index.html#capa" class="nav-link">Início</a>
+        <a href="index.html#sobre" class="nav-link">O Projeto</a>
+        <a href="index.html#temas" class="nav-link">Dados</a>
+        <a href="mapa.html" class="btn-nav-mapa">Abrir Mapa</a>
+    </nav>
+
+    <section class="conteudo-tema">
+        
+        <h1 class="titulo-tema">Projeções Climáticas</h1>
+
+        <div class="texto-explicacao">
+            <p>As projeções climatológicas apresentam diversas estimativas climáticas para as próximas décadas, podendo sintetizar (a depender do modelo) cenários mais ou menos críticos.</p>
+            
+            <p>Nesta seção, analisamos cenários mais críticos relacionados à disposição das chuvas no Estado do Paraná e também num quadro mais amplo, em escala nacional.</p>
+        </div>
+
+        <div class="galeria-imagens">
+            
+            <div class="imagem-item">
+                <img src="Modelo_Regional_Eta_BESM_Médio_(2041_2070)_RCP8.5_Média_Nº_máx._de_dias_secos_consecutivos_Anual_estados_Paraná.png" alt="Projeção 2070 - Dias Secos Paraná">
+                <span class="legenda-imagem">Figura 1: Projeção do número máximo de dias secos consecutivos no Paraná (2041-2070). Fonte: inmet</span>
+            </div>
+            
+            <div class="imagem-item">
+                <img src="Modelo_Regional_Eta_BESM_Médio_(2041_2070)_RCP8.5_Anomalia_Quant._máx._de_chuva_em_1_dia_Anual_estados_Paraná.png" alt="Projeção 2070 - Anomalia Chuva Paraná">
+                <span class="legenda-imagem">Figura 2: Projeção da anomalia de valores máximos de chuva em um único dia no Estado do Paraná (2041-2070). Fonte: inmet</span>
+            </div>
+            
+             <div class="imagem-item">
+                <img src="Modelo_Regional_Eta_BESM_Médio_(2041_2070)_RCP8.5_Anomalia_Quant._máx._de_chuva_em_1_dia_Anual.png" alt="Projeção 2070 - Anomalia Chuva Brasil">
+                <span class="legenda-imagem">Figura 3: Projeção das anomalias referentes aos valores máximos de chuva em um único dia no Brasil (2041-2070). Fonte: inmet</span>
+            </div>
+
+        </div>
+
+        <div class="texto-explicacao">
+            <p>A partir desses dados, torna-se possível refletir sobre duas principais dinâmicas: A disposição de uma maior média de dias secos consecutivos e uma anomalia positiva referente à quantidade máxima de chuva em um único dia no Paraná.</p>
+        </div>   
+        
+          <div class="texto-explicacao">
+            <p>Ou seja, no Paraná, compreende-se por esses dados um cenário no qual não apenas haveriam ainda mais períodos de maior suscetibilidade à intensas estiagens e secas (como a de 2019 - 2020), mas também um cenário de chuvas ainda mais concentradas, possívelmente aprofundando problemáticas ligadas à eventos de inundação (bastante comuns em Curitiba) . </p>
+        </div>
+
+        <div class="area-botoes">
+            <a href="index.html#temas" class="btn-voltar"><i class="fas fa-arrow-left"></i> Voltar para Categorias</a>
+        </div>
+
+    </section>
+
+    <footer>
+        <p>Desenvolvido por Wendel - UFPR 2026</p>
+    </footer>
+
+</body>
+</html>

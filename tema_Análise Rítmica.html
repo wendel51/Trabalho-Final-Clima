@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <title>Análise Rítmica | Climatologia Aplicada</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Almendra+Display&family=Eczar:wght@800&family=Ruslan+Display&display=swap" rel="stylesheet">  
+    
+    <style>
+        html { scroll-behavior: smooth; }
+        
+        body { 
+            margin: 0; padding: 0; 
+            font-family: 'Open Sans', sans-serif; 
+            color: #333; line-height: 1.6;
+            background-color: #f9f6f0;
+        }
+
+        /* --- MENU FIXO --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(139, 69, 19, 0.95);
+            padding: 23px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        nav a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: 0.3s;
+            padding-bottom: 5px;
+            border-bottom: 2px solid transparent;
+        }
+
+        nav a:hover { color: white; }
+
+        .btn-nav-mapa {
+            background: white; 
+            color: #8b4513 !important;
+            padding: 5px 15px; 
+            border-radius: 15px;
+            opacity: 1 !important;
+        }
+        .btn-nav-mapa:hover { background: #eee; }
+
+        .nav-logo {
+            height: 60px; width: 60px; object-fit: cover; 
+            vertical-align: middle; border: 2px solid white; border-radius: 50%;
+        }
+
+        /* --- ESTRUTURA DA PÁGINA INTERNA --- */
+        .conteudo-tema {
+            padding: 140px 20px 80px;
+            max-width: 1100px;
+            margin: 0 auto;
+            min-height: calc(100vh - 100px);
+        }
+
+        .titulo-tema {
+            font-family: 'Merriweather', serif;
+            font-size: 2.8em;
+            color: #8b4513;
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .titulo-tema::after {
+            content: ''; display: block; width: 80px; height: 4px;
+            background: #d2691e; margin: 15px auto 0;
+        }
+
+        /* --- ESTILO DO TEXTO --- */
+        .texto-explicacao {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto 40px auto;
+            text-align: justify;
+            font-size: 1.15em;
+            color: #444;
+        }
+
+        .texto-explicacao p {
+            margin-bottom: 20px;
+        }
+
+        /* --- GALERIA DE IMAGENS (Forçando lado a lado) --- */
+        .galeria-imagens {
+            display: flex; /* Ativa o alinhamento flexível */
+            flex-direction: row; /* Força a ficar na horizontal */
+            justify-content: center; /* Centraliza o bloco */
+            align-items: flex-start; /* Alinha pelo topo caso uma imagem seja mais alta que a outra */
+            gap: 40px; /* Espaçamento entre as imagens */
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .imagem-item {
+            flex: 1 1 0; /* Regra de ouro: força as duas divs a terem EXATAMENTE a mesma largura */
+            width: 100%; 
+            text-align: center;
+        }
+
+        .imagem-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border: 3px solid #d2691e;
+            transition: transform 0.3s;
+        }
+
+        .imagem-item img:hover {
+            transform: scale(1.03);
+        }
+
+        .legenda-imagem {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* --- RESPONSIVIDADE --- */
+        /* Só vai empilhar se a tela for menor que 800px (celulares e tablets pequenos) */
+        @media (max-width: 800px) {
+            .galeria-imagens {
+                flex-direction: column;
+                align-items: center;
+            }
+            .imagem-item {
+                max-width: 500px; /* Evita que fique gigante no celular */
+            }
+        }
+
+        /* --- BOTÃO VOLTAR --- */
+        .area-botoes {
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .btn-voltar {
+            background-color: #5c2808; 
+            color: white; 
+            padding: 12px 35px;
+            text-decoration: none; 
+            border-radius: 30px; 
+            font-size: 1.1em;
+            font-weight: bold; 
+            box-shadow: 0 4px 10px rgba(92, 40, 8, 0.4);
+            transition: transform 0.2s, background-color 0.2s;
+            display: inline-block;
+        }
+
+        .btn-voltar:hover { 
+            transform: scale(1.05); 
+            background-color: #8b4513; 
+        }
+
+        footer { background: #333; color: #aaa; text-align: center; padding: 20px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <img src="home.png" class="nav-logo" alt="Logo">
+        <a href="index.html#capa" class="nav-link">Início</a>
+        <a href="index.html#sobre" class="nav-link">O Projeto</a>
+        <a href="index.html#temas" class="nav-link">Dados</a>
+        <a href="mapa.html" class="btn-nav-mapa">Abrir Mapa</a>
+    </nav>
+
+    <section class="conteudo-tema">
+        
+        <h1 class="titulo-tema">Análise Rítmica</h1>
+
+        <div class="texto-explicacao">
+            <p>A análise rítmica apresenta dados relacionados à dinâmicas consecutivas, permitindo entender a disposição de determinados fenômenos em escalas de tempo mais curtas (horáris - diárias - mensais).</p>
+            
+            <p>Nesta seção, analisamos o rítmo da precipitação diária em Curitiba para compreender a anomalia representada pelo evento da seca de 2019 - 2020. </p>
+            
+            <p>A partir desses dados, é possível identificar padrões diferentes de distribuição precipitação diária ao longo de 2020 (ano marcado pela seca) e 2025 (ano marcado por uma "normalidade climatológica")</p>
+        </div>
+
+        <div class="galeria-imagens">
+            
+            <div class="imagem-item">
+                <img src="estao-curitiba-a807 (2).png" alt="Gráfico 1961-1990">
+                <span class="legenda-imagem">Figura 1: Gráfico anual de precipitação diária em Curitiba (2020). Fonte inmet</span>
+            </div>
+            
+            <div class="imagem-item">
+                <img src="estao-curitiba-a807 (3).png" alt="Gráfico 1991-2020">
+                <span class="legenda-imagem">Figura 2: Gráfico anual de precipitação diária em Curitiba (2025). Fonte inmet</span>
+            </div>
+
+        </div>
+
+        <div class="area-botoes">
+            <a href="index.html#temas" class="btn-voltar"><i class="fas fa-arrow-left"></i> Voltar para Categorias</a>
+        </div>
+
+    </section>
+
+    <footer>
+        <p>Desenvolvido por Wendel - UFPR 2026</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <title>Trabalho Final Climatologia Aplicada | Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Almendra+Display&family=Eczar:wght@800&family=Ruslan+Display&display=swap" rel="stylesheet">  
+    
+    <style>
+        html { scroll-behavior: smooth; }
+        
+        body { 
+            margin: 0; padding: 0; 
+            font-family: 'Open Sans', sans-serif; 
+            color: #333; line-height: 1.6;
+        }
+
+        /* --- MENU FIXO --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(139, 69, 19, 0.95);
+            padding: 15px 0; /* Dei uma leve reduzida para ficar mais elegante */
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        nav a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: 600;
+            font-size: 1.05em;
+            transition: 0.3s;
+            padding-bottom: 5px;
+            border-bottom: 2px solid transparent;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav a:hover { color: white; }
+
+        nav a.ativo {
+            color: #ffd700;
+            border-bottom: 2px solid #ffd700;
+            opacity: 1;
+        }
+
+        .btn-nav-mapa {
+            background: white; 
+            color: #8b4513 !important; 
+            padding: 8px 20px; 
+            border-radius: 20px;
+            opacity: 1 !important;
+            border-bottom: none !important;
+            font-weight: bold;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .btn-nav-mapa:hover { background: #f0f0f0; transform: translateY(-2px); }
+
+        .nav-logo {
+            height: 50px; 
+            width: 50px; 
+            object-fit: cover; 
+            vertical-align: middle; 
+            border: 2px solid white; 
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        /* --- SEÇÕES GERAIS --- */
+        section {
+            padding: 100px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        /* CAIXAS DE VIDRO (Para melhorar a leitura em cima das fotos) */
+        .caixa-vidro {
+            background: rgba(0, 0, 0, 0.65); /* Fundo escuro semi-transparente */
+            backdrop-filter: blur(5px); /* Embaça levemente a foto de fundo */
+            padding: 50px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 850px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+
+        /* --- 1. CAPA --- */
+        #capa {
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('depois iraí.PNG');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Lógica mantida */
+            color: white;
+            text-align: center;
+        }
+            
+        #capa h1 {
+            font-family: 'Eczar', serif;
+            font-weight: 800; 
+            font-size: 3.5em; /* Aumentei um pouco */
+            line-height: 1.1;
+            color: #fff;
+            text-shadow: 3px 3px 15px rgba(0,0,0,0.8); /* Sombra mais difusa e moderna */
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* --- 2. SOBRE --- */
+        #sobre { 
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('antes iraí.PNG');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Lógica mantida */
+            color: white;
+        }
+
+        #sobre h2 { 
+            font-family: 'Merriweather', serif; 
+            font-size: 2.5em; 
+            color: #ffd700; /* Dourado para contrastar com o fundo escuro */
+            margin-bottom: 30px; 
+        }
+        
+        #sobre h2::after {
+            content: ''; display: block; width: 60px; height: 3px;
+            background: #ffd700; margin: 15px auto;
+        }
+
+        #sobre p { 
+            font-size: 1.2em; 
+            margin-bottom: 20px; 
+            line-height: 1.8;
+            color: #f1f1f1;
+        }
+
+        /* --- 3. TEMAS --- */
+        #temas {
+            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('Mudança iraí.PNG');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Lógica mantida */
+            color: white;
+        }
+
+        #temas h2 {
+            font-family: 'Merriweather', serif; 
+            font-size: 2.8em; 
+            color: #fff;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+
+        /* Os Cards continuam com a sua lógica, só dei um tapa no visual */
+        .cards-grid {
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 30px; 
+            max-width: 1200px; 
+            margin: 40px auto 0; 
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95); /* Deixei o card um tiquinho transparente */
+            flex: 1 1 300px; 
+            max-width: 350px; 
+            border-radius: 15px;
+            text-decoration: none;
+            color: #333;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column; 
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .card-img { width: 100%; height: 200px; object-fit: cover; }
+        .card-content { padding: 25px; flex-grow: 1; text-align: center; }
+        .card h3 { margin: 0 0 15px 0; color: #8b4513; font-size: 1.4em; font-family: 'Merriweather', serif; }
+        .card p { font-size: 0.95em; color: #555; margin: 0; line-height: 1.5; }
+
+
+        /* --- 4. METODOLOGIA --- */
+        #metodologia {
+            background-color: #5c2808;
+            color: white;
+            text-align: center;
+        }
+
+        /* Uma caixa mais clara para separar o texto do fundo marrom sólido */
+        .caixa-metodologia {
+            background: #f9f6f0;
+            color: #333;
+            padding: 50px;
+            border-radius: 20px;
+            max-width: 800px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        .caixa-metodologia h2 {
+            font-family: 'Merriweather', serif; 
+            font-size: 2.5em; 
+            color: #8b4513; 
+            margin-bottom: 20px;
+        }
+
+        .caixa-metodologia h2::after {
+            content: ''; display: block; width: 60px; height: 3px;
+            background: #d2691e; margin: 15px auto;
+        }
+
+        .caixa-metodologia p {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            line-height: 1.7;
+            text-align: justify;
+        }
+
+        /* Botão do Mapa com design premium */
+        .btn-mapa {
+            background: linear-gradient(135deg, #d2691e, #8b4513); 
+            color: white; 
+            padding: 15px 40px;
+            text-decoration: none; 
+            border-radius: 30px; 
+            font-size: 1.2em;
+            font-weight: bold; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s; 
+            display: inline-block;
+            margin-top: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn-mapa:hover { 
+            transform: translateY(-3px) scale(1.02); 
+            box-shadow: 0 12px 25px rgba(0,0,0,0.4); 
+        }
+
+        /* --- FOOTER --- */
+        footer { 
+            background: #222; 
+            color: #bbb; 
+            text-align: center; 
+            padding: 30px 20px; 
+            font-size: 0.9em;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <img src="home.png" class="nav-logo" alt="Logo">
+        <a href="#capa" class="nav-link">Início</a>
+        <a href="#sobre" class="nav-link">O Projeto</a>
+        <a href="#temas" class="nav-link">Dados</a>
+        <a href="#metodologia" class="nav-link">Metodologia</a>
+        <a href="mapa.html" class="btn-nav-mapa"><i class="fas fa-map-marked-alt"></i> Abrir Mapa</a>
+    </nav>
+
+    <section id="capa">
+        <h1>Climatologia Aplicada ao Paraná:<br> Curitiba e o caso da seca de 2019 - 2020</h1>
+    </section>
+
+    <section id="sobre">
+        <div class="caixa-vidro">
+            <h2>O Que é este Projeto?</h2>
+            <p>Este projeto busca relacionar dados climáticos para uma aplicação de caso concreta: A compreensão do fenômeno de estiagem prolongada e seca no Paraná durante o intervalo de 2019 - 2020.</p>
+            <p>Pretende-se, também e a partir desta análise, fomentar a discussão referente aos efeitos das mudanças climáticas para com a Capital paranaense.</p>
+        </div>
+    </section>
+
+    <section id="temas">
+        <h2>Explore por Categorias</h2>
+        <p style="text-align: center; margin-bottom: 20px; font-size: 1.2em; text-shadow: 1px 1px 5px rgba(0,0,0,0.8);">Selecione um tema abaixo para ver dados detalhados, gráficos e tabelas.</p>
+
+        <div class="cards-grid">
+            <a href="tema_Normais Climatológicas.html" class="card">
+                <img src="Normais Climatológicas.jpg" alt="Foto Normais Climatológicas" class="card-img">
+                <div class="card-content">
+                    <h3>Normais Climatológicas</h3>
+                    <p>Uma análise das normais climatológicas do município de Curitiba.</p>
+                </div>
+            </a>
+
+            <a href="tema_Análise Rítmica.html" class="card">
+                <img src="Análise Rítmica.jfif" alt="Foto de Análise Rítmica " class="card-img">
+                <div class="card-content">
+                    <h3>Análise Rítmica</h3>
+                    <p>Uma análise rítmica climatológica do município de Curitiba durante o evento.</p>
+                </div>
+            </a>
+
+            <a href="tema_Projeção Climática.html" class="card">
+                <img src="MudancaClimatica.jpg" alt="Foto de escola ou artesanato" class="card-img">
+                <div class="card-content">
+                    <h3>Projeções Climáticas</h3>
+                    <p>Sobre as projeções climáticas de Curitiba.</p>
+                </div>
+            </a>
+        </div> 
+    </section>
+
+    <footer>
+        <p>Desenvolvido por Wendel - UFPR 2026</p>
+    </footer>
+
+    <script>
+        // O Javascript da rolagem contínua se mantém exatamente igual!
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        window.onscroll = () => {
+            let current = "";
+
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            navLinks.forEach((li) => {
+                li.classList.remove("ativo");
+                if (li.getAttribute("href").includes(current)) {
+                    li.classList.add("ativo");
+                }
+            });
+        };
+    </script>
+
+</body>
+</html>
